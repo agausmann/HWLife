@@ -630,7 +630,7 @@
       (reference "J5") (unit 1) (value "UPDI") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
     )
     (path "/98d822a1-05f6-4a90-84ca-6893c8a1545a/262fc697-1107-46a7-a0b8-767a450e6a46"
-      (reference "R1") (unit 1) (value "1k") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
+      (reference "R1") (unit 1) (value "120R") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
     )
     (path "/98d822a1-05f6-4a90-84ca-6893c8a1545a/beb1b0fa-2503-4473-825f-096cb86459d3"
       (reference "SW1") (unit 1) (value "Toggle") (footprint "Button_Switch_THT:SW_PUSH_6mm_H4.3mm")

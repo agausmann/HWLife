@@ -688,7 +688,7 @@
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 262fc697-1107-46a7-a0b8-767a450e6a46)
     (property "Reference" "R1" (id 0) (at 180.34 71.12 90))
-    (property "Value" "1k" (id 1) (at 180.34 73.66 90))
+    (property "Value" "120R" (id 1) (at 180.34 73.66 90))
     (property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder" (id 2) (at 180.34 79.248 90)
       (effects (font (size 1.27 1.27)) hide)
     )
