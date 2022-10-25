@@ -9,6 +9,9 @@ edition = "2021"
 avr-device = { version = "0.4.0", features = ["attiny404", "rt"] }
 
 [patch.crates-io]
+# Locally-built patch with attiny404 support.
+# You can get it from the attiny404 branch at https://github.com/agausmann/avr-device;
+# make sure to follow the build instructions in the README.
 avr-device = { path = "/home/goose/dev/contrib/avr-device" }
 
 [profile.dev]
