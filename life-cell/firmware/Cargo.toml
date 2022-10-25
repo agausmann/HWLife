@@ -1,0 +1,22 @@
+[package]
+name = "life-cell"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+avr-device = { version = "0.4.0", features = ["attiny404", "rt"] }
+
+[patch.crates-io]
+avr-device = { path = "/home/goose/dev/contrib/avr-device" }
+
+[profile.dev]
+panic = "abort"
+opt-level = "z"
+lto = true
+
+[profile.release]
+panic = "abort"
+opt-level = "z"
+lto = true
