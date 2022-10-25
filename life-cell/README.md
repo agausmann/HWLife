@@ -17,7 +17,7 @@ design possibilities:
 
   - Backplane design for distributing power and clock and routing states between
   neighbors, modules only contain logic and state. This would reduce the
-  connector size, number of connectors, and complexity of modules.
+  connector size, number of connectors, and size/complexity of modules.
 
   - Combining multiple cells into a single module. The MCU is one of the main
   factors in the overall cost per cell, so the goal would be to maximize the
