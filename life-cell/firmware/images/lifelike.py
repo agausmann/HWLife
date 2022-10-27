@@ -54,13 +54,13 @@ def main():
         "-m",
         "--mirek",
         action="store_true",
-        help="Hint that the rule is provided in Mirek/MCell notation (e.g. 23/3).",
+        help="Parse the rule as Mirek/MCell notation (e.g. 23/3).",
     )
     notation.add_argument(
         "-g",
         "--golly",
         action="store_true",
-        help="Hint that the rule is provided in Golly/RLE notation (B3/S23)",
+        help="Parse the rule as Golly/RLE notation (B3/S23).",
     )
 
     ap.add_argument(

@@ -55,3 +55,9 @@ Here are the bit-positions of each state (neighbor and self) arranged in their p
 
 The most-significant bit of the index is set to the self state, and then bits
 7-0 wind clockwise around the neighbors, starting from the top-left.
+
+```
+|  MSB                                      LSB |
+|    8 |  7 |  6 |  5 |  4 |  3 |  2 |  1 |   0 |
+| Self | NW |  N | NE |  E | SE |  S | SW |   W |
+```

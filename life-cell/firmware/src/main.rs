@@ -24,14 +24,14 @@ fn main() -> ! {
     // Order matters for the index calculation -
     // Starting top-left and going around clockwise:
     let neighbors: [Pin<Input<PullUp>>; 8] = [
-        pins.pa7.into_pull_up_input().downgrade(), // DIA1
-        pins.pa6.into_pull_up_input().downgrade(), // ADJ1
-        pins.pa4.into_pull_up_input().downgrade(), // DIA2
-        pins.pa5.into_pull_up_input().downgrade(), // ADJ2
-        pins.pb0.into_pull_up_input().downgrade(), // DIA3
-        pins.pb1.into_pull_up_input().downgrade(), // ADJ3
-        pins.pb2.into_pull_up_input().downgrade(), // DIA4
-        pins.pb3.into_pull_up_input().downgrade(), // ADJ4
+        pins.pa7.into_pull_up_input().downgrade(), // DIA1 / NW
+        pins.pa6.into_pull_up_input().downgrade(), // ADJ1 / N
+        pins.pa4.into_pull_up_input().downgrade(), // DIA2 / NE
+        pins.pa5.into_pull_up_input().downgrade(), // ADJ2 / E
+        pins.pb0.into_pull_up_input().downgrade(), // DIA3 / SE
+        pins.pb1.into_pull_up_input().downgrade(), // ADJ3 / S
+        pins.pb2.into_pull_up_input().downgrade(), // DIA4 / SW
+        pins.pb3.into_pull_up_input().downgrade(), // ADJ4 / W
     ];
     let clk = pins.pa1.into_pull_up_input();
     let mut state = pins.pa2.into_opendrain_high();
