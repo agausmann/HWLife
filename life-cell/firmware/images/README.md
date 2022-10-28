@@ -61,3 +61,44 @@ The most-significant bit of the index is set to the self state, and then bits
 |    8 |  7 |  6 |  5 |  4 |  3 |  2 |  1 |   0 |
 | Self | NW |  N | NE |  E | SE |  S | SW |   W |
 ```
+
+## Example: Game of Life
+
+Here are some example bits in the table computed for Conway's Game of Life.
+
+Recall:
+
+- The most-significant bit of the index is the state of the current
+  cell, and the other bits are the neighbor states.
+- If the current cell is dead, it will be alive in the next generation
+  if and only if exactly 3 neighbors are alive.
+- If the current cell is alive, it will be alive in the next generation
+  if and only if exactly 2 or 3 neighbors are alive.
+
+Only the bits in the right column are stored in the EEPROM. The left
+column is the index which describes the location of that bit in EEPROM,
+and is provided for the sake of demonstration.
+
+```
+000000000 : 0
+000000001 : 0
+000000010 : 0
+000000011 : 0
+000000100 : 0
+000000101 : 0
+000000110 : 0
+000000111 : 1
+000001000 : 0
+...
+100000000 : 0
+100000001 : 0
+100000010 : 0
+100000011 : 1
+100000100 : 0
+100000101 : 1
+100000110 : 1
+100000111 : 1
+100001000 : 0
+100001001 : 1
+...
+```
