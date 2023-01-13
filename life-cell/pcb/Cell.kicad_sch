@@ -911,7 +911,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 191.77 100.33 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid d66d863c-d696-4d5b-9cb4-c58666da6717)
-    (property "Reference" "J5" (id 0) (at 194.31 99.0599 0)
+    (property "Reference" "J1" (id 0) (at 194.31 99.0599 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "UPDI" (id 1) (at 194.31 101.5999 0)

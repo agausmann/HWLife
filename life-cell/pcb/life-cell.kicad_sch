@@ -318,7 +318,7 @@
   (symbol (lib_id "Mechanical:MountingHole") (at 177.8 43.815 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 54142e38-446b-46d0-8581-4012910e390e)
-    (property "Reference" "H2" (id 0) (at 180.34 42.5449 0)
+    (property "Reference" "H4" (id 0) (at 180.34 42.5449 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "M3" (id 1) (at 180.34 45.0849 0)
@@ -335,7 +335,7 @@
   (symbol (lib_id "Mechanical:MountingHole") (at 112.395 108.585 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid aa5c31cb-c19e-4d8f-98ac-7f2eb7a11121)
-    (property "Reference" "H4" (id 0) (at 115.57 107.3149 0)
+    (property "Reference" "H2" (id 0) (at 115.57 107.3149 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "M3" (id 1) (at 115.57 109.8549 0)
@@ -569,29 +569,29 @@
     (path "/98d822a1-05f6-4a90-84ca-6893c8a1545a/3d270d5d-d597-4423-8545-432b0be15960"
       (reference "#PWR010") (unit 1) (value "GND") (footprint "")
     )
-    (path "/19454d8c-8b20-4896-a5b1-cefbf4f83cbc/b8d0bd1a-48e1-4954-88d9-39ad08081272"
-      (reference "#PWR011") (unit 1) (value "VCC") (footprint "")
-    )
     (path "/19454d8c-8b20-4896-a5b1-cefbf4f83cbc/c806bfc4-efeb-4804-9cb9-cc167cb8f885"
-      (reference "#PWR012") (unit 1) (value "GND") (footprint "")
+      (reference "#PWR011") (unit 1) (value "GND") (footprint "")
     )
-    (path "/94b771bd-5699-4af4-9031-2a3069c4f4d1/b8d0bd1a-48e1-4954-88d9-39ad08081272"
-      (reference "#PWR013") (unit 1) (value "VCC") (footprint "")
+    (path "/19454d8c-8b20-4896-a5b1-cefbf4f83cbc/b8d0bd1a-48e1-4954-88d9-39ad08081272"
+      (reference "#PWR012") (unit 1) (value "VCC") (footprint "")
     )
     (path "/94b771bd-5699-4af4-9031-2a3069c4f4d1/c806bfc4-efeb-4804-9cb9-cc167cb8f885"
-      (reference "#PWR014") (unit 1) (value "GND") (footprint "")
+      (reference "#PWR013") (unit 1) (value "GND") (footprint "")
     )
-    (path "/bb158afa-1fbd-4063-ab33-621e2af4a5c4/b8d0bd1a-48e1-4954-88d9-39ad08081272"
-      (reference "#PWR015") (unit 1) (value "VCC") (footprint "")
+    (path "/94b771bd-5699-4af4-9031-2a3069c4f4d1/b8d0bd1a-48e1-4954-88d9-39ad08081272"
+      (reference "#PWR014") (unit 1) (value "VCC") (footprint "")
     )
     (path "/bb158afa-1fbd-4063-ab33-621e2af4a5c4/c806bfc4-efeb-4804-9cb9-cc167cb8f885"
-      (reference "#PWR016") (unit 1) (value "GND") (footprint "")
+      (reference "#PWR015") (unit 1) (value "GND") (footprint "")
     )
-    (path "/7b525188-5e2d-49d9-a447-2c95c7d3ce38/b8d0bd1a-48e1-4954-88d9-39ad08081272"
-      (reference "#PWR017") (unit 1) (value "VCC") (footprint "")
+    (path "/bb158afa-1fbd-4063-ab33-621e2af4a5c4/b8d0bd1a-48e1-4954-88d9-39ad08081272"
+      (reference "#PWR016") (unit 1) (value "VCC") (footprint "")
     )
     (path "/7b525188-5e2d-49d9-a447-2c95c7d3ce38/c806bfc4-efeb-4804-9cb9-cc167cb8f885"
-      (reference "#PWR018") (unit 1) (value "GND") (footprint "")
+      (reference "#PWR017") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/7b525188-5e2d-49d9-a447-2c95c7d3ce38/b8d0bd1a-48e1-4954-88d9-39ad08081272"
+      (reference "#PWR018") (unit 1) (value "VCC") (footprint "")
     )
     (path "/98d822a1-05f6-4a90-84ca-6893c8a1545a/0431cac5-da99-4dbc-86ad-1b5a0bf261ba"
       (reference "C1") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -605,29 +605,41 @@
     (path "/10a1f1cf-c572-4407-8ade-569c5a25a588"
       (reference "H1") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3_Pad")
     )
-    (path "/54142e38-446b-46d0-8581-4012910e390e"
+    (path "/aa5c31cb-c19e-4d8f-98ac-7f2eb7a11121"
       (reference "H2") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3_Pad")
     )
     (path "/538e0098-65fa-4d7c-94d9-79a12ffcc88b"
       (reference "H3") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3_Pad")
     )
-    (path "/aa5c31cb-c19e-4d8f-98ac-7f2eb7a11121"
+    (path "/54142e38-446b-46d0-8581-4012910e390e"
       (reference "H4") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3_Pad")
     )
-    (path "/19454d8c-8b20-4896-a5b1-cefbf4f83cbc/b60b7348-62ea-4008-95be-9e6eab2cdd9a"
-      (reference "J1") (unit 1) (value "Interconnect") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical")
-    )
-    (path "/7b525188-5e2d-49d9-a447-2c95c7d3ce38/b60b7348-62ea-4008-95be-9e6eab2cdd9a"
-      (reference "J2") (unit 1) (value "Interconnect") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical")
-    )
-    (path "/bb158afa-1fbd-4063-ab33-621e2af4a5c4/b60b7348-62ea-4008-95be-9e6eab2cdd9a"
-      (reference "J3") (unit 1) (value "Interconnect") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical")
-    )
-    (path "/94b771bd-5699-4af4-9031-2a3069c4f4d1/b60b7348-62ea-4008-95be-9e6eab2cdd9a"
-      (reference "J4") (unit 1) (value "Interconnect") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical")
-    )
     (path "/98d822a1-05f6-4a90-84ca-6893c8a1545a/d66d863c-d696-4d5b-9cb4-c58666da6717"
-      (reference "J5") (unit 1) (value "UPDI") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
+      (reference "J1") (unit 1) (value "UPDI") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
+    )
+    (path "/19454d8c-8b20-4896-a5b1-cefbf4f83cbc/cb780aa4-6cec-4f85-87d0-bc0b0824e017"
+      (reference "J2") (unit 1) (value "Interconnect In") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal")
+    )
+    (path "/19454d8c-8b20-4896-a5b1-cefbf4f83cbc/ad3e5386-b9b9-4f0d-a2e0-4c291a944f14"
+      (reference "J3") (unit 1) (value "Interconnect Out") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Horizontal")
+    )
+    (path "/94b771bd-5699-4af4-9031-2a3069c4f4d1/cb780aa4-6cec-4f85-87d0-bc0b0824e017"
+      (reference "J4") (unit 1) (value "Interconnect In") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal")
+    )
+    (path "/94b771bd-5699-4af4-9031-2a3069c4f4d1/ad3e5386-b9b9-4f0d-a2e0-4c291a944f14"
+      (reference "J5") (unit 1) (value "Interconnect Out") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Horizontal")
+    )
+    (path "/bb158afa-1fbd-4063-ab33-621e2af4a5c4/cb780aa4-6cec-4f85-87d0-bc0b0824e017"
+      (reference "J6") (unit 1) (value "Interconnect In") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal")
+    )
+    (path "/bb158afa-1fbd-4063-ab33-621e2af4a5c4/ad3e5386-b9b9-4f0d-a2e0-4c291a944f14"
+      (reference "J7") (unit 1) (value "Interconnect Out") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Horizontal")
+    )
+    (path "/7b525188-5e2d-49d9-a447-2c95c7d3ce38/cb780aa4-6cec-4f85-87d0-bc0b0824e017"
+      (reference "J8") (unit 1) (value "Interconnect In") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal")
+    )
+    (path "/7b525188-5e2d-49d9-a447-2c95c7d3ce38/ad3e5386-b9b9-4f0d-a2e0-4c291a944f14"
+      (reference "J9") (unit 1) (value "Interconnect Out") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Horizontal")
     )
     (path "/98d822a1-05f6-4a90-84ca-6893c8a1545a/262fc697-1107-46a7-a0b8-767a450e6a46"
       (reference "R1") (unit 1) (value "120R") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
