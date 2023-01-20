@@ -8849,7 +8849,7 @@
     )
   )
 
-  (symbol (lib_id "Switch:SW_DIP_x08") (at 462.28 341.63 0) (unit 1)
+  (symbol (lib_id "Switch:SW_DIP_x08") (at 462.28 341.63 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 04c5c031-4f06-421c-8f19-14269edba551)
     (property "Reference" "SW5" (id 0) (at 462.28 323.85 0))
@@ -9391,7 +9391,7 @@
     )
   )
 
-  (symbol (lib_id "Switch:SW_DIP_x08") (at 494.03 341.63 0) (unit 1)
+  (symbol (lib_id "Switch:SW_DIP_x08") (at 494.03 341.63 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 7ae14270-d144-41e9-9e11-bf39bbdd40b0)
     (property "Reference" "SW6" (id 0) (at 494.03 323.85 0))
@@ -9588,7 +9588,7 @@
     (pin "9" (uuid 10bbb322-0367-4a29-991e-cfbdfcf52d52))
   )
 
-  (symbol (lib_id "Switch:SW_DIP_x08") (at 525.78 341.63 0) (unit 1)
+  (symbol (lib_id "Switch:SW_DIP_x08") (at 525.78 341.63 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid aaff7776-f963-4075-bc8d-c92dfef21826)
     (property "Reference" "SW7" (id 0) (at 525.78 323.85 0))
@@ -10207,7 +10207,7 @@
     (pin "9" (uuid abbf0f1c-6c8a-4914-a101-91123796e94e))
   )
 
-  (symbol (lib_id "Switch:SW_DIP_x08") (at 556.26 341.63 0) (unit 1)
+  (symbol (lib_id "Switch:SW_DIP_x08") (at 556.26 341.63 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid fe2ad484-4e25-41c4-a6fe-400e84766d97)
     (property "Reference" "SW8" (id 0) (at 556.26 323.85 0))
