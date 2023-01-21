@@ -281,8 +281,6 @@
     (uuid df64d979-b11f-44ec-a375-1f28e5457522)
   )
 
-  (no_connect (at 59.69 73.66) (uuid 46199450-4f67-4edf-a9ac-3dd725844392))
-
   (wire (pts (xy 95.25 58.42) (xy 95.25 55.88))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 072ba71b-e496-4972-a871-49e2bec8272f)
@@ -393,6 +391,13 @@
     (uuid ee8d3ca1-9bfc-4ecd-b3c8-b44a8eedc61a)
   )
 
+  (global_label "NRST" (shape input) (at 59.69 73.66 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 1f3f9ca5-443e-437d-bc13-01a1bd31ee8e)
+    (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at 52.4993 73.5806 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
   (global_label "VLED" (shape input) (at 54.61 81.28 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid e6c85322-f1cd-4eb8-9945-04630ab9956f)
