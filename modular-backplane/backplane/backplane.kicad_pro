@@ -370,9 +370,7 @@
     "pinned_footprint_libs": [
       "agausmann"
     ],
-    "pinned_symbol_libs": [
-      "agausmann"
-    ]
+    "pinned_symbol_libs": []
   },
   "meta": {
     "filename": "backplane.kicad_pro",
