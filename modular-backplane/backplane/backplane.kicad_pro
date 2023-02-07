@@ -144,7 +144,8 @@
       },
       "track_widths": [
         0.0,
-        0.6
+        0.6,
+        0.8
       ],
       "via_dimensions": [
         {
@@ -407,6 +408,7 @@
         "name": "Power",
         "nets": [
           "+5V",
+          "/5V_IN",
           "GND",
           "VLED"
         ],
@@ -430,7 +432,7 @@
       "netlist": "",
       "specctra_dsn": "",
       "step": "",
-      "vrml": ""
+      "vrml": "backplane.wrl"
     },
     "page_layout_descr_file": ""
   },
