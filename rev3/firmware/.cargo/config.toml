@@ -1,0 +1,12 @@
+[build]
+target = "riscv32ec-unknown-none-elf.json"
+
+[target.'cfg(all(target_arch = "riscv32", target_os = "none"))']
+runner = "wlink -v flash"
+
+[unstable]
+build-std = ["core"]
+build-std-features = ["compiler-builtins-mem"]
+
+[target.riscv32ec-unknown-none-elf]
+rustflags = ["-C", "link-arg=-Tlink.x"]

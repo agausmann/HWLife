@@ -1,0 +1,27 @@
+[package]
+name = "life-module"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+embedded-hal = "1.0.0"
+qingke = "0.1.8"
+qingke-rt = "0.1.8"
+
+[dependencies.ch32v00x-hal]
+version = "0.1.0"
+git = "https://github.com/agausmann/ch32v00x-hal"
+branch = "patch-1"
+features = ["ch32v003f4u6", "rt"]
+
+[profile.dev]
+strip = false
+lto = true
+opt-level = "z"
+
+[profile.release]
+strip = false
+lto = true
+opt-level = "z"

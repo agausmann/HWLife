@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = ["life-module"]
+
+[profile.dev]
+strip = false
+lto = true
+opt-level = "z"
+
+[profile.release]
+strip = false
+lto = true
+opt-level = "z"
