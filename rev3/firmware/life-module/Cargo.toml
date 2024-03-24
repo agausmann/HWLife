@@ -15,13 +15,3 @@ version = "0.1.0"
 git = "https://github.com/agausmann/ch32v00x-hal"
 branch = "patch-1"
 features = ["ch32v003f4u6", "rt"]
-
-[profile.dev]
-strip = false
-lto = true
-opt-level = "z"
-
-[profile.release]
-strip = false
-lto = true
-opt-level = "z"
