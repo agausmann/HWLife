@@ -12,6 +12,8 @@ use ch32v00x_hal::{
 use embedded_hal::delay::DelayNs;
 use qingke_rt::entry;
 
+const PAYLOAD: &[u8] = &[32, 96, 96, 32, 96, 32, 96, 32];
+
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
@@ -26,10 +28,12 @@ fn main() -> ! {
 
     let gpiod = p.GPIOD.split(&mut rcc);
 
-    // Enable and reset TIM1, TIM2, AFIO
+    // Enable and reset TIM1, TIM2, AFIO, DMA
     {
         // There is no HAL for these yet. We have to steal RCC to set it up.
         let rcc = unsafe { &*RCC::ptr() };
+
+        rcc.ahbpcenr.modify(|_, w| w.dma1en().set_bit());
 
         rcc.apb1pcenr.modify(|_, w| w.tim2en().set_bit());
         rcc.apb1prstr.modify(|r, w| {
@@ -52,8 +56,49 @@ fn main() -> ! {
 
     // Set up TIM2
     // 24MHz / 10kHz
-    let period = 2400;
+    let period = 256;
     p.TIM2.ctlr1.modify(|_, w| w.cen().clear_bit());
+
+    // Set up PWM DMA (TIM2_UP, DMA1_CH2)
+    p.TIM2.dmaintenr.modify(|_, w| w.ude().set_bit());
+    p.TIM2.chctlr2_output().modify(|_, w| {
+        w.cc4s()
+            .variant(0b00 /* output mode */)
+            .oc4m()
+            .variant(0b110 /* PWM 1 */)
+            .oc4pe()
+            .clear_bit()
+            .oc4fe()
+            .clear_bit()
+    });
+    p.TIM2
+        .ccer
+        .modify(|_, w| w.cc4e().set_bit().cc4p().clear_bit());
+
+    p.DMA1.cfgr2.write(|w| {
+        w.msize()
+            .variant(0b00 /* 8 bits */)
+            .psize()
+            .variant(0b10 /* 32 bits */)
+            .minc()
+            .set_bit()
+            .circ()
+            .set_bit()
+            .dir()
+            .bit(true /* From memory to peripheral */)
+    });
+    p.DMA1
+        .paddr2
+        .write(|w| w.pa().variant(p.TIM2.ch4cvr.as_ptr() as u32));
+    p.DMA1
+        .maddr2
+        .write(|w| w.ma().variant(PAYLOAD.as_ptr() as u32));
+    p.DMA1
+        .cntr2
+        .write(|w| w.ndt().variant(PAYLOAD.len() as u16));
+    p.DMA1.cfgr2.modify(|_, w| w.en().set_bit());
+
+    // Finalize TIM2 init and start
     p.TIM2.atrlr.write(|w| w.atrlr().variant(period));
     p.TIM2.cnt.write(|w| w.cnt().variant(period));
     p.TIM2.ctlr1.write(|w| {
@@ -87,13 +132,14 @@ fn main() -> ! {
 
     p.AFIO
         .pcfr
-        .modify(|_, w| w.tim2rm().variant(0b11 /* T2CH3 -> PD6 */));
+        .modify(|_, w| w.tim2rm().variant(0b11 /* CH3/PD6, CH4/PD5 */));
     let _led = gpiod.pd6.into_alternate();
+    let _dma = gpiod.pd5.into_alternate();
 
     let mut delay = CycleDelay::new(&clocks);
 
-    for duty in (0..100).chain((0..100).rev()).cycle() {
-        p.TIM2.ch3cvr.write(|w| w.ch3cvr().variant(duty * 24));
+    for duty in (0..=period).chain((0..=period).rev()).cycle() {
+        p.TIM2.ch3cvr.write(|w| w.ch3cvr().variant(duty));
         delay.delay_ms(5);
     }
     loop {}
