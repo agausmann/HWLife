@@ -11,3 +11,7 @@ opt-level = "z"
 strip = false
 lto = true
 opt-level = "z"
+
+[patch.crates-io]
+# https://github.com/ch32-rs/qingke/pull/2
+qingke-rt = { git = "https://github.com/agausmann/qingke.git", branch = "interrupt-fix" }

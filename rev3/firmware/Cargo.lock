@@ -31,7 +31,7 @@ dependencies = [
  "fugit",
  "fugit-timer",
  "nb 1.1.0",
- "qingke",
+ "qingke 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -86,8 +86,9 @@ name = "life-module"
 version = "0.1.0"
 dependencies = [
  "ch32v00x-hal",
+ "critical-section",
  "embedded-hal 1.0.0",
- "qingke",
+ "qingke 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "qingke-rt",
 ]
 
@@ -150,20 +151,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "qingke"
+version = "0.1.8"
+source = "git+https://github.com/agausmann/qingke.git?branch=interrupt-fix#cd7c2ce30e78e5eb7658e12fdc0eab31d1ad4bff"
+dependencies = [
+ "bit_field",
+ "riscv 0.11.1",
+]
+
+[[package]]
 name = "qingke-rt"
 version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37bdca939f43d192c67052a5d3ccd5d909161381c92dd12d2fb40e22fd0d6cd5"
+source = "git+https://github.com/agausmann/qingke.git?branch=interrupt-fix#cd7c2ce30e78e5eb7658e12fdc0eab31d1ad4bff"
 dependencies = [
- "qingke",
+ "qingke 0.1.8 (git+https://github.com/agausmann/qingke.git?branch=interrupt-fix)",
  "qingke-rt-macros",
 ]
 
 [[package]]
 name = "qingke-rt-macros"
 version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a1fa6cc7a33128c034e351f999e1ec583fc7332f7cb6f291dd5a56802323540f"
+source = "git+https://github.com/agausmann/qingke.git?branch=interrupt-fix#cd7c2ce30e78e5eb7658e12fdc0eab31d1ad4bff"
 dependencies = [
  "proc-macro-error",
  "proc-macro2",

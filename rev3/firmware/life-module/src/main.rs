@@ -1,18 +1,15 @@
 #![no_std]
 #![no_main]
 
-use core::panic::PanicInfo;
+use core::{cell::RefCell, panic::PanicInfo};
 
 use ch32v00x_hal::{
-    delay::CycleDelay,
     gpio::GpioExt,
-    pac::{Peripherals, RCC},
+    pac::{Peripherals, DMA1, RCC, TIM2},
     rcc::RccExt,
 };
-use embedded_hal::delay::DelayNs;
-use qingke_rt::entry;
-
-const PAYLOAD: &[u8] = &[32, 96, 96, 32, 96, 32, 96, 32];
+use critical_section::Mutex;
+use qingke_rt::{entry, interrupt};
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
@@ -61,42 +58,20 @@ fn main() -> ! {
 
     // Set up PWM DMA (TIM2_UP, DMA1_CH2)
     p.TIM2.dmaintenr.modify(|_, w| w.ude().set_bit());
+    p.TIM2.ch4cvr.write(|w| w.ch4cvr().variant(0));
     p.TIM2.chctlr2_output().modify(|_, w| {
         w.cc4s()
             .variant(0b00 /* output mode */)
             .oc4m()
             .variant(0b110 /* PWM 1 */)
             .oc4pe()
-            .clear_bit()
+            .set_bit()
             .oc4fe()
             .clear_bit()
     });
     p.TIM2
         .ccer
         .modify(|_, w| w.cc4e().set_bit().cc4p().clear_bit());
-
-    p.DMA1.cfgr2.write(|w| {
-        w.msize()
-            .variant(0b00 /* 8 bits */)
-            .psize()
-            .variant(0b10 /* 32 bits */)
-            .minc()
-            .set_bit()
-            .circ()
-            .set_bit()
-            .dir()
-            .bit(true /* From memory to peripheral */)
-    });
-    p.DMA1
-        .paddr2
-        .write(|w| w.pa().variant(p.TIM2.ch4cvr.as_ptr() as u32));
-    p.DMA1
-        .maddr2
-        .write(|w| w.ma().variant(PAYLOAD.as_ptr() as u32));
-    p.DMA1
-        .cntr2
-        .write(|w| w.ndt().variant(PAYLOAD.len() as u16));
-    p.DMA1.cfgr2.modify(|_, w| w.en().set_bit());
 
     // Finalize TIM2 init and start
     p.TIM2.atrlr.write(|w| w.atrlr().variant(period));
@@ -134,13 +109,95 @@ fn main() -> ! {
         .pcfr
         .modify(|_, w| w.tim2rm().variant(0b11 /* CH3/PD6, CH4/PD5 */));
     let _led = gpiod.pd6.into_alternate();
-    let _dma = gpiod.pd5.into_alternate();
+    let _tx = gpiod.pd5.into_alternate();
 
-    let mut delay = CycleDelay::new(&clocks);
+    critical_section::with(|cs| {
+        let mut ctx = DMA_CTX.borrow(cs).borrow_mut();
+        *ctx = Some(DmaContext::new(p.DMA1, p.TIM2));
+        ctx.as_mut().unwrap().start();
+    });
 
-    for duty in (0..=period).chain((0..=period).rev()).cycle() {
-        p.TIM2.ch3cvr.write(|w| w.ch3cvr().variant(duty));
-        delay.delay_ms(5);
+    loop {
+        // FIXME Seems to freeze the DMA controller
+        // wfi();
     }
-    loop {}
+}
+
+struct DmaContext {
+    dma1: DMA1,
+    tim2: TIM2,
+}
+
+impl DmaContext {
+    fn new(dma1: DMA1, tim2: TIM2) -> Self {
+        Self { dma1, tim2 }
+    }
+
+    fn poll(&mut self) {
+        let intf = self.dma1.intfr.read();
+
+        if intf.tcif2().bit_is_set() {
+            self.start();
+            self.dma1.intfcr.write(|w| w.ctcif2().set_bit());
+        }
+        self.dma1.intfcr.write(|w| w.cgif2().set_bit());
+    }
+
+    fn start(&mut self) {
+        // TODO safety
+
+        self.dma1.cfgr2.modify(|_, w| w.en().clear_bit());
+
+        const PAYLOAD: &[u8] = b"Hello World!";
+
+        static mut TXBUF: [u8; 162] = [0; 162];
+
+        for (byte, buf) in PAYLOAD.iter().zip(unsafe { TXBUF[1..].chunks_mut(10) }) {
+            buf[0] = 0xa0; // Start symbol
+            for (i_bit, slot) in (0..8).rev().zip(&mut buf[1..]) {
+                let bit = (byte & (1 << i_bit)) != 0;
+                *slot = if bit { 0x60 } else { 0x20 };
+            }
+            buf[9] = 0xe0; // Stop symbol
+        }
+        let tx_len = 10 * PAYLOAD.len() + 2;
+        unsafe {
+            TXBUF[0] = 0;
+            TXBUF[tx_len - 1] = 0;
+        }
+
+        self.dma1.cfgr2.write(|w| {
+            w.msize()
+                .variant(0b00 /* 8 bits */)
+                .psize()
+                .variant(0b10 /* 32 bits */)
+                .minc()
+                .set_bit()
+                .dir()
+                .bit(true /* From memory to peripheral */)
+                .tcie()
+                .set_bit()
+        });
+        self.dma1
+            .paddr2
+            .write(|w| w.pa().variant(self.tim2.ch4cvr.as_ptr() as u32));
+        self.dma1
+            .maddr2
+            .write(|w| w.ma().variant(unsafe { TXBUF.as_ptr() } as u32));
+        self.dma1.cntr2.write(|w| w.ndt().variant(tx_len as u16));
+        self.dma1.cfgr2.modify(|_, w| w.en().set_bit());
+    }
+}
+
+static DMA_CTX: Mutex<RefCell<Option<DmaContext>>> = Mutex::new(RefCell::new(None));
+
+#[interrupt]
+fn DMA1_CHANNEL2() {
+    //FIXME is the interrupt running? why doesn't the interrupt restart the transfer?
+    critical_section::with(|cs| {
+        let mut ctx = DMA_CTX.borrow(cs).borrow_mut();
+        if let Some(ctx) = &mut *ctx {
+            ctx.poll();
+        }
+    });
 }
